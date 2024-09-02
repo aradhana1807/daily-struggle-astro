@@ -1,0 +1,54 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Body from '../components/Body.astro';
+import {  SITE_DESCRIPTION } from '../consts';
+import Content from '../components/Content.astro';
+import {Image} from '@astrojs/image/components';
+
+
+const chapters = (await Astro.glob('./chapters/*.md')).sort(
+    (a:any, b:any) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title="Chapters" description={SITE_DESCRIPTION} />
+    </head>
+    <Body>
+        <Header />
+        <main class="pt-[56px] min-h-screen">
+            <Content>
+                <section class="flex flex-col items-center mb-8">
+                    <div class="text-center text-wrap max-w-xl text-lg font-suse sm:max-w-lg sm:text-md">
+                        <h1 class="text-2xl font-bold mb-4">
+                            All Chapters
+                        </h1>
+
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {chapters.map((chapter) => (
+                                <li class="text-center mb-4">
+                                    <a href={chapter.url} >
+                                        <Image 
+                                        class="border border-slate-300 dark:border-zinc-700 rounded-xl" 
+                                        src={chapter.frontmatter.heroImage}  alt={chapter.frontmatter.title} width={1440} aspectRatio={2.0} />
+                                        <div class="text-xl font-semibold">
+                                            {chapter.frontmatter.title}
+                                        </div>
+                                        <div class="opacity-70 mt-2">
+                                            {chapter.frontmatter.description}
+                                        </div>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            </Content>
+        </main>
+        <Footer />
+    </Body>
+</html>

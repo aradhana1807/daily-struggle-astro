@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Body from '../components/Body.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Image from 'astro/components/Image.astro';
+import Content from '../components/Content.astro';
 ---
 
 <!doctype html>
@@ -14,13 +15,28 @@ import Image from 'astro/components/Image.astro';
 	</head>
 	<Body>
 		<Header />
-		<main class="flex flex-col justify-center items-center mt-2">
-			<Image src="/cloudhikari.svg" alt="Hikari and Cloud" width="450" height="450"/>
-			<p class="text-center">
-				Hikari and Cloud welcome you to the world of daily struggle.
-				<br>
-				Embark on the journey with them, as they accompany their humans through life's ups and downs, sharing in their daily struggles and triumphs
-			</p>
+		<main class="pt-[56px] min-h-screen">
+			<Content>
+				<section class="flex flex-col items-center">
+					<Image src="/cloudhikari.svg" alt="Hikari and Cloud" width="400" height="400"
+						class="hidden dark:block"/>
+
+					<Image src="/cloudhikari-light.svg" alt="Hikari and Cloud" width="400" height="400" class="dark:hidden"/>
+
+					<div class="text-center text-wrap max-w-xl text-lg font-suse sm:max-w-lg sm:text-md">
+						
+						<p class="mb-6">
+							Hikari and Cloud welcome you to the world of daily struggle.
+							Embark on the journey with them, as they accompany their humans through life's ups and downs. 
+							Navigating amidst the chaos, one day at a time, is where the adventure begins.
+							<br/>
+						</p>
+						<p class="italic">
+							May the solace and warmth be the comfort waiting for you.
+						</p>
+					</div>
+				</section>
+			</Content>
 		</main>
 		<Footer />
 	</Body>
